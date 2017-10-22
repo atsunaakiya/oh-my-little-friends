@@ -1,0 +1,44 @@
+.cube {
+  --cubesize: 25px;
+  --anim: maincuberotation;
+  position:absolute;
+  top:calc(50% - var(--cubesize) / 2);
+  right:calc(50% - var(--cubesize) / 2);
+  width:var(--cubesize); height:var(--cubesize);
+  transform-style:preserve-3d;
+  transform: translateZ(calc(-1 * var(--cubesize) / 2));
+  animation:var(--anim) 8s linear infinite alternate;
+}
+/* .cube .front { 
+  background: rgba(225,0,225,.5) !important;
+}
+.cube .back { 
+  background: rgba(0,173,225,.5) !important;
+}
+.cube .top, .bottom, .left, .right { 
+  background: linear-gradient(to bottom, rgba(225,0,225,.5), rgba(0,173,225,.5)) !important;
+} */
+.cube .top, .bottom, .left, .right, .front, .back { 
+  background: linear-gradient(to bottom, rgba(225,0,225,.4), rgba(0,173,225,.4)) !important;
+}
+.cube > div {
+  position:absolute;
+  background:rgba(0,173,225,.5);
+  width:var(--cubesize); height:var(--cubesize);
+  border:1px solid rgba(224,60,138,.0);
+}
+.cube > .front  { transform:rotateY(   0deg ) translateZ(calc(var(--cubesize) / 2)); }
+.cube > .back   { transform:rotateX( 180deg ) translateZ(calc(var(--cubesize) / 2)); }
+.cube > .right  { transform:rotateY(  90deg ) translateZ(calc(var(--cubesize) / 2)); }
+.cube > .left   { transform:rotateY( -90deg ) translateZ(calc(var(--cubesize) / 2)); }
+.cube > .top    { transform:rotateX(  90deg ) translateZ(calc(var(--cubesize) / 2)); }
+.cube > .bottom { transform:rotateX( -90deg ) translateZ(calc(var(--cubesize) / 2)); }
+
+@keyframes maincuberotation {
+  0%   { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(    0deg  )  rotateY(    0deg ); }
+  20%  { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(  120deg ) rotateY(  160deg ); }
+  40%  { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(  70deg ) rotateY(  -130deg ); }
+  60%  { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(  -55deg)  rotateY(  -140deg ); }
+  80%  { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(  -150deg ) rotateY( 33deg ); }
+  100% { transform:translateZ(calc(-1 * var(--cubesize) / 2)) rotateX(  -160deg ) rotateY( -80deg ); }
+}

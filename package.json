@@ -1,0 +1,9 @@
+{
+  "name": "oh-my-little-friends",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "coffee --bare --output dist --watch --compile sand_star.coffee"
+  }
+}

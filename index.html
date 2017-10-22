@@ -1,0 +1,88 @@
+<!DOCTYPE HTML5>
+<html>
+	<head>
+		<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="//cdn.bootcss.com/bootstrap-select/2.0.0-beta1/css/bootstrap-select.min.css" rel="stylesheet">
+		<link href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="//cdn.bootcss.com/jquery/3.0.0/jquery.js"></script>
+		<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="//cdn.bootcss.com/bootstrap-select/2.0.0-beta1/js/bootstrap-select.min.js"></script>
+		<script src="dist/sand_star.js"></script>
+		<link href="css/sand_star.css" rel="stylesheet">
+		<style type="text/css">
+			html, body, #app{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+		<title>Oh My Little Friends</title>
+	</head>
+	<body>
+		<div id="app">
+			<h1>Friends</h1>
+		</div>
+		
+		<script>
+			var ctrl = new SandStarController({
+				el: document.getElementById('app'),
+				number: 15,
+				speed: 0.1,
+				refresh_time: 50,
+				release_time: 1000,
+				touch_dx: 0.8,
+				touch_dy: 0.8,
+				click_dx: 0.02,
+				click_dy: 0.02,
+				hit_dist_adj: 0.7,
+				generator: function(){
+					var p = document.createElement('div');
+					// p.style.height = 50
+					// p.style.width = 50
+					// p.style.backgroundColor = 'lightblue'
+					p.classList.add('cube');
+					['front', 'back', 'top', 'bottom', 'left', 'right'].forEach(function(c){
+						var s = document.createElement('div');
+						s.classList.add(c);
+						p.appendChild(s);
+					});
+					return p;
+				}
+			});
+			[
+				{
+					img_a: 'image/sabaru_a.png',
+					img_f: 'image/sabaru_f.png',
+					left: '10%',
+					top: '40%'
+				}, {
+					img_a: 'image/kaban_a.png',
+					img_f: 'image/kaban_f.png',
+					left: '60%',
+					top: '20%'
+				}
+			].forEach(function(obj){
+				var p = document.createElement('img')
+				p.width = 100
+				p.style.top = obj.top
+				p.style.left = obj.left
+				p.src = obj.img_a
+				p.style.position = 'absolute'
+				document.getElementById('app').appendChild(p)
+				var f = new Friend(p)
+				f.on_hit = (function(){
+					p.src = obj.img_f
+				})
+				p.onclick = function(){
+					p.src = obj.img_a
+				}
+				ctrl.add_friend(f)
+			});
+			ctrl.start();
+		</script>
+	</body>
+</html>
